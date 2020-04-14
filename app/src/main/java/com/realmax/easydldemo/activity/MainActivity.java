@@ -1,10 +1,16 @@
 package com.realmax.easydldemo.activity;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.RequiresApi;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.ImageView;
@@ -43,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageView iv_image;
 
     // 请替换为您的序列号
-    private static final String SERIAL_NUM = "CB4A-C78C-50AA-FC2E";
+    private static final String SERIAL_NUM = "AE39-94A2-BDB6-AE26";
     private Handler uiHandler;
     /**
      * 配置信息的JavaBean
@@ -71,8 +77,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        requestPermission();
         initView();
         init();
+    }
+
+    @SuppressLint("NewApi")
+    private void requestPermission() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 10);
+        } else {
+            init();
+        }
     }
 
     private void initView() {
