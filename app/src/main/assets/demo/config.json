@@ -5,12 +5,12 @@
     "apiUrl": null, 
     "thresholdRec": 0.4, 
     "sk": null, 
-    "model_version": 32354, 
+    "model_version": 32427, 
     "model_type": 2, 
     "soc": [
         "arm", 
         "dsp", 
         "npu"
     ], 
-    "model_name": "Target2V2"
+    "model_name": "Target2V3"
 }

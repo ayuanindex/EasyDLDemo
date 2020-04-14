@@ -12,11 +12,13 @@
     ], 
     "labels": [
         "[default]", 
-        "yingtao", 
+        "shark", 
+        "people", 
         "luomu", 
-        "lousy"
+        "lousy", 
+        "fish"
     ], 
-    "mid": 15430, 
+    "mid": 15468, 
     "height": 640, 
     "param_file_asset_path": "infer-detect/params.enc", 
     "width": 640, 
@@ -26,7 +28,7 @@
         0.007843
     ], 
     "model_file_asset_path": "infer-detect/model.enc", 
-    "rid": 32354, 
+    "rid": 32427, 
     "colorFormat": "BGR", 
     "product": "EasyDL", 
     "thresholdRec": 0.4, 

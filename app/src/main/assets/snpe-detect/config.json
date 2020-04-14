@@ -13,11 +13,13 @@
     ], 
     "labels": [
         "[default]", 
-        "yingtao", 
+        "shark", 
+        "people", 
         "luomu", 
-        "lousy"
+        "lousy", 
+        "fish"
     ], 
-    "mid": 15430, 
+    "mid": 15468, 
     "height": 640, 
     "snpe_runtimes_order": [
         1, 
@@ -31,7 +33,7 @@
         0.007843
     ], 
     "model_file_asset_path": "snpe-detect/params.enc", 
-    "rid": 32354, 
+    "rid": 32427, 
     "colorFormat": "BGR", 
     "product": "EasyDL", 
     "thresholdRec": 0.4, 

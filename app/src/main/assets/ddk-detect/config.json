@@ -12,11 +12,13 @@
     ], 
     "labels": [
         "[default]", 
-        "yingtao", 
+        "shark", 
+        "people", 
         "luomu", 
-        "lousy"
+        "lousy", 
+        "fish"
     ], 
-    "mid": 15430, 
+    "mid": 15468, 
     "model_file_asset_path_v200": "ddk-detect/params.200.enc", 
     "height": 640, 
     "product": "EasyDL", 
@@ -26,7 +28,7 @@
         0.007843, 
         0.007843
     ], 
-    "rid": 32354, 
+    "rid": 32427, 
     "colorFormat": "BGR", 
     "thresholdRec": 0.4, 
     "nType": 103
