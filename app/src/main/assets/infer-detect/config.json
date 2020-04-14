@@ -1,0 +1,34 @@
+{
+    "soc": [
+        "arm", 
+        "dsp", 
+        "npu"
+    ], 
+    "channelOrder": "CHW", 
+    "means": [
+        127.5, 
+        127.5, 
+        127.5
+    ], 
+    "labels": [
+        "[default]", 
+        "yingtao", 
+        "luomu", 
+        "lousy"
+    ], 
+    "mid": 15430, 
+    "height": 640, 
+    "param_file_asset_path": "infer-detect/params.enc", 
+    "width": 640, 
+    "scale": [
+        0.007843, 
+        0.007843, 
+        0.007843
+    ], 
+    "model_file_asset_path": "infer-detect/model.enc", 
+    "rid": 32354, 
+    "colorFormat": "BGR", 
+    "product": "EasyDL", 
+    "thresholdRec": 0.4, 
+    "nType": 103
+}
