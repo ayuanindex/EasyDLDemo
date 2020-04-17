@@ -172,12 +172,12 @@ public class ResultMaskView extends View {
 
 
             BaseRectBoundResultModel model = mResultModelList.get(i);
-            if (model.getName().equals("luomu")) {
+           /* if (model.getName().equals("luomu")) {
                 paint.setColor(Color.BLUE);
             } else {
                 paint.setColor(Color.RED);
             }
-
+*/
             Rect rect = model.getBounds(sizeRatio, originPt);
             // 绘制框
             if (!model.isHasMask()) {

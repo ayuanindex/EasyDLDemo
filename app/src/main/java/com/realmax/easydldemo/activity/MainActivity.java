@@ -5,16 +5,20 @@ import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.BitmapRegionDecoder;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.DrawableWrapper;
+import android.media.MediaMetadataRetriever;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.BitmapCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.baidu.ai.edge.core.base.BaseConfig;
 import com.baidu.ai.edge.core.base.BaseException;
@@ -25,7 +29,6 @@ import com.baidu.ai.edge.core.detect.DetectionResultModel;
 import com.baidu.ai.edge.core.infer.InferConfig;
 import com.baidu.ai.edge.core.infer.InferInterface;
 import com.baidu.ai.edge.core.infer.InferManager;
-import com.baidu.ai.edge.core.segment.SegmentInterface;
 import com.baidu.ai.edge.core.snpe.SnpeConfig;
 import com.baidu.ai.edge.core.snpe.SnpeManager;
 import com.baidu.ai.edge.core.util.FileUtil;
@@ -75,11 +78,11 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        requestPermission();
         initView();
-        init();
+        requestPermission();
+        Log.d(TAG, "onCreate: ");
+        super.onCreate(savedInstanceState);
     }
 
     @SuppressLint("NewApi")
@@ -87,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 10);
         } else {
+            initConfig();
             init();
         }
     }
@@ -98,12 +102,14 @@ public class MainActivity extends AppCompatActivity {
 
     private void init() {
         uiHandler = new Handler(getMainLooper());
-        new Thread() {
+        ThreadPoolManager.execute(new Runnable() {
             @Override
             public void run() {
-                super.run();
-                bitmaps = new ArrayList<>();
-                bitmaps.add(BitmapFactory.decodeResource(getResources(), R.drawable.pic_40));
+                /*bitmaps = new ArrayList<>();
+                Bitmap e = BitmapFactory.decodeResource(getResources(), R.drawable.pic_40);
+                e.recycle();
+                e = null;
+                bitmaps.add(e);
                 bitmaps.add(BitmapFactory.decodeResource(getResources(), R.drawable.pic_42));
                 bitmaps.add(BitmapFactory.decodeResource(getResources(), R.drawable.pic_43));
                 bitmaps.add(BitmapFactory.decodeResource(getResources(), R.drawable.pic_48));
@@ -116,7 +122,16 @@ public class MainActivity extends AppCompatActivity {
                 bitmaps.add(BitmapFactory.decodeResource(getResources(), R.drawable.pic_105));
                 bitmaps.add(BitmapFactory.decodeResource(getResources(), R.drawable.pic_119));
                 bitmaps.add(BitmapFactory.decodeResource(getResources(), R.drawable.pic_132__1_));
-                bitmaps.add(BitmapFactory.decodeResource(getResources(), R.drawable.pic_luosi_luomu));
+                bitmaps.add(BitmapFactory.decodeResource(getResources(), R.drawable.pic_luosi_luomu));*/
+
+                bitmaps = new ArrayList<>();
+                /*Bitmap bitmap = null;*/
+                for (int j = 0; j < 14; j++) {
+                    int drawable = getResources().getIdentifier("pic_" + (i + 1), "drawable", getPackageName());
+                    Bitmap bitmap = BitmapFactory.decodeResource(getResources(), drawable);
+                    bitmaps.add(bitmap);
+                    Log.d(TAG, "run: " + j);
+                }
 
                 // 初始化读取config.json配置
                 /*initConfig();*/
@@ -126,13 +141,20 @@ public class MainActivity extends AppCompatActivity {
                     realtime_result_mask.setHandler(uiHandler);
                     realtime_result_mask.clear();
 
-                    /*MainActivity.this.start();*/
+                    MainActivity.this.start();
                     // 选择设备类型
                     choosePlatform();
                     detect();
                 }
             }
-        }.start();
+        });
+       /* new Thread() {
+            @Override
+            public void run() {
+                super.run();
+
+            }
+        }.start();*/
     }
 
     private void detect() {
@@ -140,8 +162,9 @@ public class MainActivity extends AppCompatActivity {
         ThreadPoolManager.createAutoFocusTimerTask(new Runnable() {
             @Override
             public void run() {
-                if (isStart)
+                if (isStart) {
                     realtime_result_mask.clear();
+                }
                 Bitmap bitmap = bitmaps.get(i);
 
                 runOnUiThread(new Runnable() {
@@ -234,6 +257,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void initManager() {
         try {
+            Log.d(TAG, "initManager: ");
             if (configBean.getModel_type() == MODEL_DETECT) {
                 switch (platform) {
                     case TYPE_DDK200:
@@ -338,10 +362,10 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "onDetectBitmap: 模型初始化中，请稍后");
                 listener.onResult(null);
                 return;
+            } else {
+                List<DetectionResultModel> modelList = mInferManager.detect(bitmap, confidence);
+                listener.onResult(fillDetectionResultModel(modelList));
             }
-
-            List<DetectionResultModel> modelList = mInferManager.detect(bitmap, confidence);
-            listener.onResult(fillDetectionResultModel(modelList));
         } catch (BaseException e) {
             e.printStackTrace();
             Log.d(TAG, "onDetectBitmap: " + e.getMessage());
@@ -369,7 +393,7 @@ public class MainActivity extends AppCompatActivity {
         return results;
     }
 
-    @Override
+    /*@Override
     protected void onPause() {
         super.onPause();
         isStart = false;
@@ -395,7 +419,7 @@ public class MainActivity extends AppCompatActivity {
         isStart = true;
         initConfig();
         start();
-    }
+    }*/
 
     @Override
     protected void onDestroy() {

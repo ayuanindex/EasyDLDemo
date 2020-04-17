@@ -61,7 +61,7 @@ public class ThreadPoolManager {
                 runnable.run();
             }
         };
-        timerFocus.scheduleAtFixedRate(task, 0, cameraScanInterval);
+        timerFocus.scheduleAtFixedRate(task, 1000, cameraScanInterval);
         return timerFocus;
     }
 

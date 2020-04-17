@@ -1,0 +1,16 @@
+{
+    "product": "EasyDL", 
+    "ak": null, 
+    "nType": 103, 
+    "apiUrl": null, 
+    "thresholdRec": 0.4, 
+    "sk": null, 
+    "model_version": 32354, 
+    "model_type": 2, 
+    "soc": [
+        "arm", 
+        "dsp", 
+        "npu"
+    ], 
+    "model_name": "Target2V2"
+}

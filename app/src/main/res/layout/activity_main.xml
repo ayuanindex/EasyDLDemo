@@ -10,7 +10,7 @@
         android:id="@+id/iv_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/pic_luosi_luomu" />
+        />
 
     <com.baidu.ai.edge.ui.view.ResultMaskView
         android:id="@+id/realtime_result_mask"
