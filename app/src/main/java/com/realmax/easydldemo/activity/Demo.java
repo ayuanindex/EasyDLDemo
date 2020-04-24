@@ -53,7 +53,7 @@ public class Demo extends AppCompatActivity {
     /**
      * 在这里替换序列号
      */
-    public static final String SERIAL_NUM = "2960-8A4A-4FDB-D3A2";
+    public static final String SERIAL_NUM = "CB4E-6CDD-8F98-BA44";
     private ImageView iv_image;
     private ResultMaskView realtime_result_mask;
     private Handler uiHandler;
@@ -299,7 +299,9 @@ public class Demo extends AppCompatActivity {
     private void detection(Bitmap bitmap, Listener listener) throws BaseException {
         Log.d(TAG, "detection: ----------------------");
         List<DetectionResultModel> detect = mInferManager.detect(bitmap);
-        listener.onResult(fillDetectionResultModel(detect));
+        if (detect != null) {
+            listener.onResult(fillDetectionResultModel(detect));
+        }
         Log.d(TAG, "detection: ----------------------");
     }
 

@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageView iv_image;
 
     // 请替换为您的序列号
-    private static final String SERIAL_NUM = "AE39-94A2-BDB6-AE26";
+    private static final String SERIAL_NUM = "CB4E-6CDD-8F98-BA44";
     private Handler uiHandler;
     /**
      * 配置信息的JavaBean
@@ -105,33 +105,29 @@ public class MainActivity extends AppCompatActivity {
         ThreadPoolManager.execute(new Runnable() {
             @Override
             public void run() {
-                /*bitmaps = new ArrayList<>();
-                Bitmap e = BitmapFactory.decodeResource(getResources(), R.drawable.pic_40);
-                e.recycle();
-                e = null;
-                bitmaps.add(e);
-                bitmaps.add(BitmapFactory.decodeResource(getResources(), R.drawable.pic_42));
-                bitmaps.add(BitmapFactory.decodeResource(getResources(), R.drawable.pic_43));
-                bitmaps.add(BitmapFactory.decodeResource(getResources(), R.drawable.pic_48));
-                bitmaps.add(BitmapFactory.decodeResource(getResources(), R.drawable.pic_50));
-                bitmaps.add(BitmapFactory.decodeResource(getResources(), R.drawable.pic_58));
-                bitmaps.add(BitmapFactory.decodeResource(getResources(), R.drawable.pic_61));
-                bitmaps.add(BitmapFactory.decodeResource(getResources(), R.drawable.pic_69));
-                bitmaps.add(BitmapFactory.decodeResource(getResources(), R.drawable.pic_80));
-                bitmaps.add(BitmapFactory.decodeResource(getResources(), R.drawable.pic_99));
-                bitmaps.add(BitmapFactory.decodeResource(getResources(), R.drawable.pic_105));
-                bitmaps.add(BitmapFactory.decodeResource(getResources(), R.drawable.pic_119));
-                bitmaps.add(BitmapFactory.decodeResource(getResources(), R.drawable.pic_132__1_));
-                bitmaps.add(BitmapFactory.decodeResource(getResources(), R.drawable.pic_luosi_luomu));*/
-
                 bitmaps = new ArrayList<>();
-                /*Bitmap bitmap = null;*/
+                bitmaps.add(BitmapFactory.decodeResource(getResources(), R.drawable.pic_1));
+                bitmaps.add(BitmapFactory.decodeResource(getResources(), R.drawable.pic_2));
+                bitmaps.add(BitmapFactory.decodeResource(getResources(), R.drawable.pic_3));
+                bitmaps.add(BitmapFactory.decodeResource(getResources(), R.drawable.pic_4));
+                bitmaps.add(BitmapFactory.decodeResource(getResources(), R.drawable.pic_5));
+                bitmaps.add(BitmapFactory.decodeResource(getResources(), R.drawable.pic_6));
+                bitmaps.add(BitmapFactory.decodeResource(getResources(), R.drawable.pic_7));
+                bitmaps.add(BitmapFactory.decodeResource(getResources(), R.drawable.pic_8));
+                bitmaps.add(BitmapFactory.decodeResource(getResources(), R.drawable.pic_9));
+                bitmaps.add(BitmapFactory.decodeResource(getResources(), R.drawable.pic_10));
+                bitmaps.add(BitmapFactory.decodeResource(getResources(), R.drawable.pic_11));
+                bitmaps.add(BitmapFactory.decodeResource(getResources(), R.drawable.pic_12));
+                bitmaps.add(BitmapFactory.decodeResource(getResources(), R.drawable.pic_13));
+                bitmaps.add(BitmapFactory.decodeResource(getResources(), R.drawable.pic_14));
+
+                /*bitmaps = new ArrayList<>();
+                 *//*Bitmap bitmap = null;*//*
                 for (int j = 0; j < 14; j++) {
                     int drawable = getResources().getIdentifier("pic_" + (i + 1), "drawable", getPackageName());
                     Bitmap bitmap = BitmapFactory.decodeResource(getResources(), drawable);
                     bitmaps.add(bitmap);
-                    Log.d(TAG, "run: " + j);
-                }
+                }*/
 
                 // 初始化读取config.json配置
                 /*initConfig();*/
@@ -166,7 +162,7 @@ public class MainActivity extends AppCompatActivity {
                     realtime_result_mask.clear();
                 }
                 Bitmap bitmap = bitmaps.get(i);
-
+                Log.d(TAG, "run:--------------- " + bitmap.toString());
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {

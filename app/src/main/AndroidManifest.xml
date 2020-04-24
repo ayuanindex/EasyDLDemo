@@ -17,7 +17,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity
-            android:name=".activity.Demo"
+            android:name=".activity.MainActivity"
             android:screenOrientation="landscape"
             tools:ignore="LockedOrientationActivity">
             <intent-filter>
